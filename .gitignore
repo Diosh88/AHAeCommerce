@@ -3,13 +3,24 @@
 .env.local
 .env.*.local
 
+# MCP config — contains secret token references
+.mcp.json
+
 # Dependencies
 node_modules/
 
 # Build output
 .next/
+.velite/
 dist/
 out/
+
+# Test artifacts
+playwright-report/
+test-results/
+
+# TypeScript build info
+tsconfig.tsbuildinfo
 
 # OS
 .DS_Store

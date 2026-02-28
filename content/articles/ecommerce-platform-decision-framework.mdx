@@ -1,0 +1,88 @@
+---
+title: "The eCommerce Platform Decision Framework: How to Pick Without Regret"
+description: "A structured framework for evaluating eCommerce platforms based on your actual business model, not feature lists. Covers Shopify, WooCommerce, and custom solutions — and the trade-offs that matter after year one."
+publishedAt: "2026-02-28"
+topic: "platform"
+topicLabel: "Platform"
+readingTime: 8
+clarifiesDecision: true
+preventsMistake: false
+revealsCost: false
+explainsTradoff: true
+featured: true
+affiliateLinks: false
+---
+
+Most operators pick a platform because someone they trust used it. That's how they end up three years in, paying for workarounds they could have avoided, or rebuilding because the platform couldn't grow with them.
+
+This framework changes the decision sequence. Instead of starting with features, start with constraints.
+
+## The Question Most Operators Don't Ask
+
+The right question isn't "which platform is best?" It's: **what does your business model require that a platform must support without compromise?**
+
+A DTC brand selling 50 SKUs with a strong brand story has different requirements than a distributor with 40,000 SKUs and B2B pricing. Neither Shopify nor WooCommerce is universally better. Each is better for a specific set of constraints.
+
+## Step 1: Map Your Non-Negotiables
+
+Before comparing platforms, define your non-negotiables — the requirements where failure is not acceptable. These typically fall into four categories:
+
+**Catalog complexity** — How many products? How many variants? Do you need configurable products, bundles, or subscription logic baked in?
+
+**Transaction model** — Are you DTC-only, or do you need B2B pricing, net terms, or wholesale portals?
+
+**Integration dependencies** — What systems must connect without custom development? ERP, WMS, 3PL, POS?
+
+**Ownership and control** — How much do you need to own the data, the infrastructure, and the codebase?
+
+Write these down before you open a single comparison article.
+
+## Step 2: Score Platforms Against Your Non-Negotiables (Not Features)
+
+Here's where most evaluations go wrong. Operators compare feature lists. Feature lists are marketing documents. What matters is how a platform handles your specific non-negotiables.
+
+**Shopify** excels when: catalog is manageable (under 5,000 SKUs), transaction model is primarily DTC, team has no developer resources, and speed to launch is a constraint. Its ecosystem is its strength — for standard use cases, you can find a working solution quickly.
+
+Where Shopify fails: complex B2B (without significant custom work or expensive apps), large catalog performance, and data portability. If you ever want to leave, your data is in Shopify's schema, not yours.
+
+**WooCommerce** excels when: you need full data ownership, have developer resources, catalog complexity is high, or margins require avoiding per-transaction platform fees. Open source means you own the code.
+
+Where WooCommerce fails: it's a WordPress plugin, which means hosting, security, updates, and performance are your problem. Teams without developers regularly underestimate the operational overhead.
+
+**Custom / Headless** makes sense when: your business model has requirements that no off-the-shelf platform handles without significant compromise, you have a high-margin, high-volume operation that justifies the build cost, or competitive differentiation requires the storefront to be unique.
+
+Where custom fails almost everyone who tries it: the ongoing maintenance cost is invisible in the initial business case. You are now a software company.
+
+## Step 3: Evaluate the Switching Cost
+
+This is the step operators skip. Every platform decision has a switching cost — the cost of changing your mind in year three.
+
+Ask: if we outgrow this platform or it stops serving us, what does migration look like?
+
+Shopify migration is painful. Your product data, customer data, and order history are in Shopify's format. Every theme is proprietary. Migrating away means a significant engineering project.
+
+WooCommerce migration is simpler from a data perspective (it's MySQL), but your theme and customizations are WordPress-specific.
+
+Custom platforms have the highest switching cost of all — because the switching cost is the build cost.
+
+**The strategic play**: choose the platform whose switching cost you are willing to accept at the point where you'd want to switch. If you're optimizing for optionality, WooCommerce's data portability matters. If you're optimizing for speed and know your business model won't change dramatically, Shopify's lock-in is acceptable.
+
+## The Framework in Practice
+
+Run this sequence:
+
+1. Define non-negotiables (catalog complexity, transaction model, integration dependencies, ownership requirements)
+2. Eliminate platforms that fail any non-negotiable — regardless of how good they are on everything else
+3. Score remaining platforms on your nice-to-haves
+4. Model the switching cost for each option
+5. Choose the platform whose lock-in you can accept
+
+This sequence prevents the most common mistake: selecting a platform for its strengths in areas that don't matter to your specific business, then discovering its weaknesses in the areas that do.
+
+## What This Framework Doesn't Tell You
+
+It doesn't tell you which platform to pick. That depends on your non-negotiables — and only you know them.
+
+What it does tell you: the decision is not primarily about features, pricing, or what worked for someone else's business. It's about fit between your business model and the platform's architecture — and the cost of being wrong.
+
+Make that decision deliberately, with your constraints mapped, before you evaluate anything else.
