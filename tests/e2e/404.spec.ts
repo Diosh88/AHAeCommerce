@@ -77,7 +77,19 @@ test.describe('404 page', () => {
 
   test('404 page has robots meta tag set to noindex', async ({ page }) => {
     await page.goto(NON_EXISTENT_URL);
-    const robotsMeta = await page.locator('meta[name="robots"]').getAttribute('content');
-    expect(robotsMeta).toContain('noindex');
+    // Next.js may render multiple robots meta tags (layout + not-found metadata).
+    // Verify at least one contains "noindex".
+    const robotsMetas = page.locator('meta[name="robots"]');
+    const count = await robotsMetas.count();
+    expect(count).toBeGreaterThan(0);
+    let hasNoindex = false;
+    for (let i = 0; i < count; i++) {
+      const content = await robotsMetas.nth(i).getAttribute('content');
+      if (content?.includes('noindex')) {
+        hasNoindex = true;
+        break;
+      }
+    }
+    expect(hasNoindex).toBe(true);
   });
 });
