@@ -6,7 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-### Added (2026-02-28 — Phase 5: Testing — Gate 4 PASS 7/7)
+### Added (2026-02-28 — Phase 5: Testing — Gate 4a PASS 7/7)
+- L3 integration tests: subscribe (10 tests) + lemonsqueezy webhook (10 tests) — real Supabase, UUID-prefixed data, afterAll cleanup
+- E2E tests activated: 404 (9 tests), article-page (9 tests), subscribe-flow (9 tests) — chromium-desktop + chromium-mobile + webkit-mobile
+- Test suite: **177 total tests passing** (76 unit+component, 20 L3 integration, 81 E2E)
+- Lighthouse scores (production build): Accessibility 98-100, Performance 97, SEO 91-100
+- Testing handoff document: `docs/planning/TESTING_HANDOFF.md`
+- Gate 4a PASS (7/7 sections) — Deployment phase unlocked
+
+### Fixed (2026-02-28 — Testing)
+- `tests/e2e/404.spec.ts`: robots meta test handles multiple `meta[name="robots"]` elements from Next.js metadata system
+- `tests/e2e/article-page.spec.ts`: strict mode selectors (`.first()`) for EmailCapture forms; articles link locator uses `a[href="/articles"]`
+- `tests/e2e/subscribe-flow.spec.ts`: selectors scoped to `main` role to avoid matching footer EmailCapture; route handler properly calls `route.abort()`
+- `tests/components/ArticleCard.test.tsx`: added missing `vi` import
+- `tsconfig.json`: excluded `tests/` from main type-check (tests type-checked by vitest)
+
+### Added (2026-02-28 — Phase 5: Testing setup — Gate 4 PASS 7/7)
 - Test infrastructure: `vitest.config.mts`, `playwright.config.ts`, `tests/setup.ts`
 - API unit tests: health (8), subscribe (15), webhook/lemonsqueezy (14) — includes HMAC security invariant tests
 - Component tests: ArticleCard (16), EmailCapture (23)

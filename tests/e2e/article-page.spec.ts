@@ -83,8 +83,10 @@ test.describe('Article page rendering', () => {
 
   test('back-to-articles link is present and navigates correctly', async ({ page }) => {
     await page.goto(FIXTURE_ARTICLE_URL);
-    // The articles nav link is in the site header
-    const articlesLink = page.getByRole('link', { name: /^articles$/i }).first();
+    // Find any link pointing to /articles (may be in footer or header).
+    // Use href attribute for reliability across viewport sizes.
+    const articlesLink = page.locator('a[href="/articles"]').first();
+    await articlesLink.scrollIntoViewIfNeeded();
     await articlesLink.click();
     await expect(page).toHaveURL(/\/articles/);
   });

@@ -10,9 +10,6 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div className="py-24 md:py-32">
-      {/* React 19 hoists <meta> to <head>. Metadata exports from not-found.tsx
-          are not processed by Next.js App Router, so we render directly. */}
-      <meta name="robots" content="noindex, nofollow" />
       <div className="max-w-[45rem] mx-auto px-4 text-center">
         <p className="text-6xl font-extrabold font-sans text-[--color-brand] leading-none">
           404

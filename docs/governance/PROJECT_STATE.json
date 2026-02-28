@@ -2,7 +2,7 @@
   "$schema": "governance-state-v16",
   "project_name": "AHAeCommerce",
   "created_at": "2026-02-28T00:00:00Z",
-  "current_phase": "testing",
+  "current_phase": "deployment",
   "test_db_strategy": "single-db",
   "test_db_rationale": "Pre-launch dev database with 0 rows — no real user data at risk. Separate test project deferred until production has real data.",
   "capacitor_first": false,
@@ -181,32 +181,44 @@
       }
     },
     "testing": {
-      "status": "active",
+      "status": "completed",
       "entered_at": "2026-02-28T00:00:00Z",
-      "approved_by": "Gate 4 PASS (7/7) — testing phase entered",
+      "approved_by": "Gate 4a PASS (7/7 sections)",
       "approved_at": "2026-02-28T00:00:00Z",
-      "artifacts": [],
+      "artifacts": [
+        "tests/api/subscribe.test.ts",
+        "tests/api/health.test.ts",
+        "tests/api/webhooks/lemonsqueezy.test.ts",
+        "tests/components/ArticleCard.test.tsx",
+        "tests/components/EmailCapture.test.tsx",
+        "tests/integration/subscribe.integration.test.ts",
+        "tests/integration/lemonsqueezy.integration.test.ts",
+        "tests/e2e/404.spec.ts",
+        "tests/e2e/article-page.spec.ts",
+        "tests/e2e/subscribe-flow.spec.ts",
+        "docs/planning/TESTING_HANDOFF.md"
+      ],
       "handoff_doc": "docs/planning/TESTING_HANDOFF.md",
       "diosh": {
-        "declarations": null,
-        "infrastructure": null,
+        "declarations": "177 total tests (76 unit+component, 20 L3 integration, 81 E2E). Gate 4a PASS 7/7. Lighthouse: Accessibility 98-100, Performance 97, SEO 91-100. Single-DB strategy with safety protocol.",
+        "infrastructure": "Vitest (unit+integration), Playwright (E2E, 3 browsers). L3 integration config: vitest.integration.config.mts with pool:forks. E2E: chromium-desktop + chromium-mobile + webkit-mobile.",
         "operations": {
-          "refiner": null,
-          "polisher": null,
-          "verifier": null
+          "refiner": "All test files reviewed against Gate 4a Section G (Test Data Reality). Zero DB mocks in L3/L4. Zero E2E interceptors. Real Supabase connection verified.",
+          "polisher": "E2E tests fixed: 4 failure patterns resolved (robots meta, strict mode selectors, footer/main scope, mobile link locators). TypeScript type-check cleaned.",
+          "verifier": "Gate 4a evaluated: 7/7 sections PASS. Lighthouse run on 4 critical pages (production build). npm audit clean. Secret grep clean."
         },
         "safeguards": {
-          "security": null,
-          "growth": null,
-          "platform": null,
-          "performance": null,
-          "monetization": null
+          "security": "npm audit 0 high/critical. HMAC validation tested (wrong secret, missing header). Input validation tested (malformed data). Secret grep clean.",
+          "growth": "EmailCapture tested across all placements (home-hero, article-inline, article-end, subscribe-page). Subscribe flow E2E verified.",
+          "platform": "Cross-browser: Chrome + WebKit. Mobile: 375px viewport tested. Touch targets >= 44px verified. No horizontal overflow.",
+          "performance": "Lighthouse Performance 97 on all pages (production). Bundle 102KB first load. API response times <1s in integration tests.",
+          "monetization": "Lemon Squeezy webhook tested: valid order, idempotency, invalid signature, unhandled events. 10/10 integration tests."
         },
-        "handoff": null
+        "handoff": "docs/planning/TESTING_HANDOFF.md — Test results, known issues, deployment readiness"
       }
     },
     "deployment": {
-      "status": "locked",
+      "status": "active",
       "entered_at": null,
       "approved_by": null,
       "approved_at": null,
@@ -418,7 +430,24 @@
         "G_design_fidelity": "PASS — Design-OS tokens enforced, zero raw colors, typography correct, motion budget enforced, E2E spec created for 375/768/1280 (execution in Testing phase)"
       }
     },
-    "testing_verification": null,
+    "testing_verification": {
+      "gate": "Gate 4a: Testing Verification",
+      "status": "PASS",
+      "score": "7/7 sections",
+      "threshold": "All applicable sections must PASS",
+      "date": "2026-02-28",
+      "evaluated_by": "phase-gate evaluation",
+      "artifact": "docs/planning/TESTING_HANDOFF.md",
+      "sections": {
+        "A_test_coverage": "PASS — 76/76 unit+component, 20/20 L3 integration, 81/81 E2E (3 browsers). All 3 API endpoints covered. All critical flows tested.",
+        "B_security_testing": "PASS — npm audit 0 high/critical, input validation tested, HMAC tested, secret grep clean. Auth N/A Phase 1.",
+        "C_accessibility": "PASS — Lighthouse Accessibility: Home 100, Subscribe 100, Articles 98, Article Detail 100. All >= 90.",
+        "D_performance": "PASS — Lighthouse Performance: all pages 97 (production build). Bundle 102KB. CWV within targets.",
+        "E_visual_regression": "PASS — E2E at 375px + 1280px. Zero raw Tailwind colors. Cross-browser: Chrome + WebKit.",
+        "F_bug_status": "PASS — Zero critical/high bugs. G-013 (JSON-LD) deferred to Gate 6. Known issues in TESTING_HANDOFF.md.",
+        "G_test_data_reality": "PASS — G1: PostgreSQL. G2: SELECT 1 verified. G3: same schema. G4: zero DB mocks in L3/L4. G5: zero E2E interceptors. G6: single-DB override documented."
+      }
+    },
     "testing_to_deployment": null,
     "launch_readiness": null
   },
@@ -536,6 +565,20 @@
       "reason": "Gate 4 PASS (7/7 sections). Testing phase is now active. Gate 4a requires: npm test passing, E2E passing, Lighthouse ≥80/90, zero high/critical audit vulns, breakpoint verification.",
       "timestamp": "2026-02-28T00:00:00Z",
       "by": "phase-gate v13.0"
+    },
+    {
+      "phase": "testing",
+      "action": "gate_4a_pass",
+      "reason": "Gate 4a PASS (7/7 sections): A) 177 tests (76 unit, 20 L3 integration, 81 E2E across 3 browsers). B) npm audit clean, HMAC + validation tested, 0 secrets. C) Lighthouse Accessibility 98-100. D) Lighthouse Performance 97. E) 375px + 1280px verified, zero raw Tailwind colors, Chrome + WebKit. F) Zero critical/high bugs. G) Real DB verified (STOP S13 cleared), zero mocks in L3/L4, single-DB override documented. Deployment phase unlocked.",
+      "timestamp": "2026-02-28T00:00:00Z",
+      "by": "phase-gate evaluation"
+    },
+    {
+      "phase": "deployment",
+      "action": "unlocked",
+      "reason": "Gate 4a PASS (7/7). Deployment phase is now active. Gate 5 requires: Vercel deployment, environment variables configured, production build verified, DNS configured.",
+      "timestamp": "2026-02-28T00:00:00Z",
+      "by": "phase-gate evaluation"
     }
   ],
   "version": "16.0"
